@@ -153,15 +153,46 @@ header {
 
 #addTaskSection {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+  /* flex-wrap: wrap; */
   margin-bottom: 20px;
+  justify-content: start;
+  align-items: center;
+  #addTaskBtn {
+    margin-top: 15px;
+    box-sizing: border-box;
+  }
 }
 
-#addTaskSection {
+.item {
+  width: 20%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+}
+
+#taskTitle,
+#taskDueDate,
+#taskPriority,
+#taskNotes,
+#addTaskBtn {
+  height: 50px;
+}
+
+#addTaskSection input,
+#addTaskSection select,
+#addTaskSection textarea {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+/* #addTaskSection {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
-}
+} */
 
 #addTaskSection input,
 #addTaskSection select,
@@ -399,10 +430,44 @@ button:hover {
     text-align: center;
   }
 }
+
+.taskDueDate.completed {
+  background-color: #e0f7fa;
+  color: #006400;
+}
+.taskDueDate.completed span {
+}
 /* Responsive design */
 @media (max-width: 600px) {
   #addTaskSection {
     flex-direction: column;
+  }
+  .item {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+  }
+
+  #taskTitle,
+  #taskDueDate,
+  #taskPriority,
+  #taskNotes,
+  #addTaskBtn {
+    height: 50px;
+  }
+  #addTaskBtn {
+    width: 100%;
+  }
+
+  #filterSection {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    column-gap: 10px;
+  }
+  #searchTasks {
+    width: 100%;
   }
 }
 @media (max-width: 700px) {
@@ -415,5 +480,14 @@ button:hover {
       height: fit-content;
       text-align: center;
     }
+  }
+  #filterSection {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    column-gap: 10px;
+  }
+  #searchTasks {
+    width: 100%;
   }
 }
