@@ -21,6 +21,7 @@ const darkModeToggle = document.querySelector("#darkModeToggle");
 const titleHeader = document.querySelector("#titleHeder");
 const exportTasksBtnPdf = document.querySelector("#exportTasksBtnPdf");
 const exportTasksBtnecxel = document.querySelector(".exportTasksBtnecxel");
+const labelText = document.querySelectorAll(".labelText");
 
 window.addEventListener("DOMContentLoaded", () => {
   loadDarkMode(titleHeader, darkModeToggle);
@@ -95,7 +96,7 @@ sortByDate.addEventListener("change", () => {
 
 darkModeToggle.addEventListener("click", () => {
   const isDark = !document.body.classList.contains("dark-mode");
-  setDarkMode(isDark, titleHeader, darkModeToggle);
+  setDarkMode(isDark, titleHeader, darkModeToggle,labelText);
 });
 
 exportTasksBtnPdf.addEventListener("click", exportPDF);
