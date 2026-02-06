@@ -4,6 +4,7 @@ import { updateTaskList } from "./render.js";
 import { getFilteredTasks } from "./filter.js";
 import { loadDarkMode, setDarkMode } from "./darkMode.js";
 import { exportPDF, exportExcel } from "./export.js";
+import { clearForm } from "./form.js";
 
 const addTaskBtn = document.querySelector("#addTaskBtn");
 const taskCategories = document.querySelector("#taskCategories");
@@ -31,6 +32,9 @@ addTaskBtn.addEventListener("click", () => {
   const task = createTaskObject(title, dueDate, priority, notes);
   addTask(task);
   updateTaskList(taskCategories, getFilteredTasks());
+
+  clearForm(); // ← اینجا اضافه می‌کنیم
+
 });
 
 taskCategories.addEventListener("click", (e) => {
