@@ -1,4 +1,10 @@
-import { loadTask, getTasks, addTask, updateTask, deleteTask } from "./storage.js";
+import {
+  loadTask,
+  getTasks,
+  addTask,
+  updateTask,
+  deleteTask,
+} from "./storage.js";
 import { createTaskObject } from "./tasks.js";
 import { updateTaskList } from "./render.js";
 import { getFilteredTasks } from "./filter.js";
@@ -34,7 +40,6 @@ addTaskBtn.addEventListener("click", () => {
   updateTaskList(taskCategories, getFilteredTasks());
 
   clearForm(); // ← اینجا اضافه می‌کنیم
-
 });
 
 taskCategories.addEventListener("click", (e) => {
@@ -50,18 +55,43 @@ taskCategories.addEventListener("click", (e) => {
     deleteTask(index);
   } else return;
 
-  updateTaskList(taskCategories, getFilteredTasks());
+  updateTaskList(
+    taskCategories,
+    getFilteredTasks(searchTasks.value, filterPriority.value, sortByDate.value),
+  );
 });
 
-searchTasks.addEventListener("input", () =>
-  updateTaskList(taskCategories, getFilteredTasks(searchTasks.value, filterPriority.value, sortByDate.value))
-);
-filterPriority.addEventListener("change", () =>
-  updateTaskList(taskCategories, getFilteredTasks(searchTasks.value, filterPriority.value, sortByDate.value))
-);
-sortByDate.addEventListener("change", () =>
-  updateTaskList(taskCategories, getFilteredTasks(searchTasks.value, filterPriority.value, sortByDate.value))
-);
+let debounceTimer;
+
+searchTasks.addEventListener("input", () => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    const filtered = getFilteredTasks(
+      searchTasks.value,
+      filterPriority.value,
+      sortByDate.value,
+    );
+    updateTaskList(taskCategories, filtered);
+  }, 100); // 200ms delay
+});
+
+filterPriority.addEventListener("change", () => {
+  const filtered = getFilteredTasks(
+    searchTasks.value,
+    filterPriority.value,
+    sortByDate.value,
+  );
+  updateTaskList(taskCategories, filtered);
+});
+
+sortByDate.addEventListener("change", () => {
+  const filtered = getFilteredTasks(
+    searchTasks.value,
+    filterPriority.value,
+    sortByDate.value,
+  );
+  updateTaskList(taskCategories, filtered);
+});
 
 darkModeToggle.addEventListener("click", () => {
   const isDark = !document.body.classList.contains("dark-mode");
