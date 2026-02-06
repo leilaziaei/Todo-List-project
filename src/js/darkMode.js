@@ -13,7 +13,7 @@ export function setDarkMode(isDark, titleHeader, toggleBtn, labelText) {
   localStorage.setItem("ThemMode", isDark ? "dark" : "light");
 }
 
-export function loadDarkMode(titleHeader, toggleBtn) {
+export function loadDarkMode(titleHeader, toggleBtn, labelText) {
   const mode = localStorage.getItem("ThemMode");
   const isDark = mode === "dark";
   document.body.classList.toggle("dark-mode", isDark);
